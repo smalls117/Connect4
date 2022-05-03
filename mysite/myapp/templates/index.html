@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+{% verbatim %}
+
+<div id="app">{{ message }}
+
+</div>
+{% endverbatim %}
+<p>{{ paragraph }}</p>
+<div class="grid-container">
+    <div class="grid-x grid-padding-x">
+        {% for o in data %}
+        <div class="large-4 medium-6 small-12 cell">
+            <p>{{ o.suggestion }} - {{ o.author }}</p>
+            {% if o.num_comms > 0 %}
+            <div class="grid-container">
+                <div class="grid-x grid-padding-x">
+                    {% for comm in o.coments %}
+                    <div class="large-4 medium-6 small-12 cell">
+                        <p>{{ comm.comment }} - {{ comm.author}}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% if request.user.is_authenticated %}
+<form action="/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" class="button" value="Submit">
+</form>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script src="https://unpkg.com/vue@3"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="{% static 'js/myvue.js' %}"></script>
+{% endblock %}
