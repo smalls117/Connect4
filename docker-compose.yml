@@ -2,18 +2,20 @@
 version: '3'
 
 services:
-  web:
-    build: .
-    volumes:
-       - .:/code
-    #links: 
-       #- redis:redis
-    ports:
-       - 8000:8000
-    #user: 3087:1003
-    command: python /code/mysite/manage.py runserver 0.0.0.0:8000
+   web:
+      build: .
+      volumes:
+         - .:/code
+      links: 
+         - redis:redis
+      depends_on:
+         - redis 
+      ports:
+         - 8000:8000
+      #user: 3087:1003
+      command: python /code/mysite/manage.py runserver 0.0.0.0:8000
 
-   #redis:
-      #image: redis:latest
-      #expose:
-         #- 6379
+   redis:
+      image: redis:latest
+      expose:
+         - 6379
