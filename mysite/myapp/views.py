@@ -37,7 +37,7 @@ def index(request):
         "data": data_list,
         "form": form,
     }
-    return render(request, "index.html", context = context)
+    return render(request, "base.html", context = context)
 
 def suggestion_view(request):
     if request.method == "GET":

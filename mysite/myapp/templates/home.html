@@ -1,16 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Connect 4{% endblock %}
 
 {% block content %}
+<h3 id="main_title"> Connect 4</h3>
 {% if user.is_authenticated %}
   <p>Hey {{ user.username }}!</p>
   Welcome to our game, Connect 4!
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
+
 {% else %}
   <p>LOSER, you are not logged in 🤣🤣</p>
-  <a href="{% url 'login' %}">Log In</a> |
-  <a href="{% url 'signup' %}">Sign Up</a>
 {% endif %}
 {% endblock %}
